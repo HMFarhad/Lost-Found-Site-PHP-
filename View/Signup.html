@@ -1,0 +1,251 @@
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="css/frame.css">
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+</head>
+<body>
+    <div align="center" class="divHeader">
+        <h1 id="h1Title">LOST AND FOUND</h1>
+    </div>
+    <div class="divNavigation">
+         <ul class="ulNavBar">
+			<li id="liSign"><a href="Signup.html">Sign Up</a></li>
+			<li id="liSign"><a  href="Signin.php">Sign In</a></li>
+            <li><a href="Contact.php">Contact Us</a></li>
+			<li><a href="About.php">About</a></li>
+			<li><a  href="Home.php">Home</a></li>
+        </ul>   
+    </div>
+    <div class="divBody">
+            <div class="container" align="center">
+				<div class="contHeader"></div>
+				<form id="form1" action="../Service/SignUp_validation.php" method="post">
+					<input type="text" placeholder="Name" id="userName" name="userName"/><br/>
+					<input type="text" placeholder="Email" id="email" name="email"/><br/>
+					<input type="number" placeholder="Contact no" id="contactNo" name="contactNo"/><br/>
+					<input id="password" type="password" placeholder="Password" name="password" /><br/>
+					<input id="confirm_password" type="password" placeholder="Confirm Password" name="confirm_password"/><br/>
+					<input id="Male" class="radioBtn" type="radio" value="Male" name="gender" />Male 
+					<input id="Female" class="radioBtn" type="radio" value="Female" name="gender" />Female<br/>
+					<input id="checkbox" type="checkbox" checked/><a href="javascript:window.open('Signup_condition.html','mypopuptitle','width=600,height=400')">Agree with all terms and conditions</a><br/>
+					<input id="btnSubmit" type="button" value="Sign up" onclick="validation()"/><br/>
+				</form>
+                <script>
+                    function NameValidation(){
+                        var name = document.getElementById("userName").value;
+						var nameRE = /^[A-Za-z\s]+$/;
+						if(name!="")
+						{
+                            if(nameRE.test(name))
+							{
+								//alert(name);
+								return true;
+							}
+							else alert("Only A-Z or a-z should be on Name!!");
+                        }
+						else
+						{
+                            alert("User name missing!!");
+                            return false;
+                        }
+                    }
+
+                    function EmailValidation()
+					{
+                        var userEmail = document.getElementById("email").value;
+                        var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						
+						if(userEmail!="")
+						{
+                            if(emailRE.test(userEmail))
+							{
+								//alert(userEmail);
+								return true;
+							}
+							else
+							{
+								alert("Invalid Email Format!!");
+								return false;
+							}
+						}
+						else
+						{
+							alert("Enter your email address");
+							return false;
+						}
+                    }
+			
+                    function PhoneValidation()
+					{
+                        var phoneNo=document.getElementById("contactNo").value;
+						var phoneNoRE = /^\d+$/;
+						
+                        if((phoneNo.length<12)&&(phoneNo.length>10))
+						{
+                            if(phoneNoRE.test(phoneNo))
+							{
+								var tmp1 = phoneNo.charAt(0);
+								var tmp2 = phoneNo.charAt(2);
+								if(tmp1==0)
+								{
+									if(tmp2==5||tmp2==6||tmp2==7||tmp2==8||tmp2==9)
+									{
+										//alert (phoneNo);
+										return true;
+									}
+									else
+									{
+										alert("Phone Operator Do Not Exist !!!");
+										return false;
+									}		
+								}
+								else
+								{
+									alert("Invalid Phone Number!!Must start with 0!");
+									return false;
+								}	
+							}
+                        }
+						else
+						{
+                            alert("Invalid Phone Number");
+                            return false;
+                        }
+                    }
+					function termsChecked()
+					{
+						if(document.getElementById("checkbox").checked)
+						{
+							return true;
+						}
+						else
+						{
+							alert("Please check terms and conditions!!");
+							return false;
+						}						
+					}
+					function genderChecked()
+					{
+						if(document.getElementById("Male").checked==true)
+						{
+							//alert("Male");
+							return true;
+						}
+						else if(document.getElementById("Female").checked==true)
+						{
+							//alert("Female");
+							return true;
+						}
+						else
+						{
+							alert("Please Select Gender!!");
+							return false;
+						}
+					}
+					function passwordChecked()
+					{
+						var password = document.getElementById("password").value;
+						var pCapital = /[A-Z]/g;
+						var pSmall = /[a-z]/g;
+						var pNumber = /[\d]/g;
+						var pSymbol = /[!@#$%^&*()-_,.<>?]/g;
+ 						if(password!="")
+						{
+							if(password.length>5)
+							{
+								if(password.length<20)
+								{
+									if(password.match(pCapital)!=null)
+									{
+										if(password.match(pSmall)!=null)
+										{
+											if(password.match(pNumber)!=null)
+											{
+												if(password.match(pSymbol)!=null)
+												{
+													//alert("Password OK");
+													return true;
+												}
+												else
+												{
+												 alert("Password Must Contain a Special Charecter!!");
+												 return false;
+												}
+											}
+											else
+											{
+											 alert("Password Must Contain a Number!!");
+											 return false;
+											}
+										}
+										else
+										{
+										 alert("Password Must Contain a Lowercase Letter!!");
+										 return false;
+										}
+									}
+									else
+									{
+									 alert("Password Must Contain a UpperCase Letter!!");
+									 return false;
+									}
+								}
+								else
+								{
+								 alert("Password too Long!!20 Char Maximum!!");
+								 return false;
+								}
+							}
+							else
+							{
+							 alert("Password too Short!!At least 6 Char Required!!");
+							 return false;
+							}		
+						}
+						else
+						{
+						 alert("Password Can't be Empty!!");
+						 return false;
+						}
+					}
+					function confirmPassword()
+					{
+						var password = document.getElementById("password").value;
+						var confirm_password = document.getElementById("confirm_password").value;
+						if(confirm_password!="")
+						{
+							if(password==confirm_password)
+							{
+								//alert("Password Matched!!");
+								return true;
+							}
+							else
+							{
+							 alert("Password Didn't Matched!!");
+							 return false;
+							}
+						}
+						else
+						{
+						 alert("Confirm Password Field Required!!!!");
+						 return false;
+						}
+					}
+                    function validation()
+					{		
+		                var form = document.getElementById("form1");
+                        if(NameValidation()==true&&EmailValidation()==true&&PhoneValidation()==true&&termsChecked()==true&&genderChecked()==true&&passwordChecked()==true&&confirmPassword()==true)
+						{
+							alert("Registration Successfull");
+                            form.submit();
+                        }		
+	                }
+                </script>
+    </div>
+	<div class="divFooter">
+        all copyrights reserved @ null point 2017
+        </div>
+	</div>
+</body>
+</html>

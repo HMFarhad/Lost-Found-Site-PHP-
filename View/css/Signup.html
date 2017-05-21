@@ -1,0 +1,96 @@
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="css/frame.css">
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+</head>
+<body>
+    <div align="center" class="divHeader">
+        <h1 id="h1Title">LOST AND FOUND</h1>
+    </div>
+    <div class="divNavigation">
+         <ul class="ulNavBar">
+            <li><a  href="Home.php">Home</a></li>
+            <li><a href="About.php">About</a></li>
+            <li><a href="Contact.php">Contact</a></li>
+            
+            <li id="liSign"><a href="Signup.html">Sigin up</a></li>
+			<li id="liSign"><a  href="Signin.php">Sign in</a></li>
+        </ul>   
+    </div>
+    <div class="divBody">
+            <div class="container" align="center">
+				<form id="form1" action="../Service/SignUp_validation.php" method="post">
+					<input type="text" placeholder="Name" id="userName" name="userName" required/><br/>
+					<input type="text" placeholder="Email" id="email" name="email" required/><br/>
+					<input type="number" placeholder="Contact no" id="contactNo" name="contactNo" required/><br/>
+					<input type="password" placeholder="Password" name="password" required/><br/>
+					<input type="password" placeholder="Confirm Password" name="confirm_password" required/><br/>
+					<input class="radioBtn" type="radio" value="Male" id="male" name="gender" />Male <input class="radioBtn" type="radio" value="Female" id="female" name="gender" />Female<br/>
+					<input id="checkbox" type="checkbox" checked/>Agree with all terms and conditions<br/>
+					<input id="btnSignin" type="button" value="Sign up" onclick="validation()"/><br/>
+				</form>
+                <script>
+                    function NameValidation(){
+                        var name = document.getElementById("userName").value;
+                        if(name!=""){
+                            alert(name);
+                            return true;
+                        }else{
+                            alert("User name missing!!");
+                            return false;
+                        }
+                    }
+
+                    function EmailValidation(){
+                        var userEmail = document.getElementById("email").value;
+                        if(userEmail!=""){
+                            var firstDiv = userEmail.split("@");
+                            var result = firstDiv.length;
+                            if(result>=2){
+                                var secondDiv = firstDiv[1].split(".");
+                                var result = secondDiv.length;
+                                if(result>=2){
+                                    alert("Your mail address:"+userEmail);
+                                    return true;
+                                }else{
+                                    alert("Invalide formate");
+                                    return false;
+                                }
+                            }else{
+                                alert("Enter your mail address");
+                                return false;
+                            }
+                        }
+                    }
+
+                    function PhoneValidation(){
+                        var phoneNo=document.getElementById("contactNo").value;
+                        if((phoneNo.length>10)){
+                            alert (phoneNo);
+                            return true;
+                        }else{
+                            alert("Invalide Phone Number");
+                            return false;
+                        }
+                    }
+
+                    function passwordValidation(){
+                        
+                    }
+                    function validation(){		
+		                var form = document.getElementById("form1");
+                        if(NameValidation()==true&&EmailValidation()==true&&PhoneValidation()==true){
+                            form.submit();
+                            }else{
+								alert("Problem");
+							}	
+	                    }
+                </script>
+            </div>
+        </div>
+    <div class="divFooter">
+        all copyrights reserved @ null point 2017
+    </div>
+</body>
+</html>
